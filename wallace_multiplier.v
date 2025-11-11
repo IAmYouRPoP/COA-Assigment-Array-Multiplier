@@ -121,7 +121,7 @@ module wallace_7to3_unsigned (
 
 endmodule
 
-// Supporting Modules (Helper Blocks)
+// Supporting Modules
 
 // 3:2 Carry-Save Adder 
 module csa_3to2_vec32 (
@@ -175,3 +175,4 @@ module final_adder_32 (
 );
     assign {cout, sum} = in_a + in_b + cin;
 endmodule
+
