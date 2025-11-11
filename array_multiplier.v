@@ -1,17 +1,14 @@
 `timescale 1ns/1ps
 
-// ===================================================
-// 16x16 Array Multiplier (Structural, No '+' Used)
-// ===================================================
+// 16x16 Array Multiplier 
+
 module array_multiplier (
     input  [15:0] in_A,
     input  [15:0] in_B,
     output [31:0] prod_out
 );
 
-    // ----------------------------
-    // Partial Product Generation
-    // ----------------------------
+
     wire [15:0] pp [15:0];  // 16x16 partial product matrix
     genvar i, j;
 
@@ -23,13 +20,9 @@ module array_multiplier (
         end
     endgenerate
 
-    // ----------------------------
-    // Stage-wise Ripple Adder Array
-    // ----------------------------
     wire [31:0] row_sum [15:0];
     wire [31:0] row_carry [15:0];
 
-    // First row initialization (LSB)
     assign row_sum[0]   = {16'b0, pp[0]};
     assign row_carry[0] = 32'b0;
 
@@ -51,11 +44,8 @@ module array_multiplier (
 
 endmodule
 
-
-
-// ===================================================
 // 32-bit Ripple Carry Adder (Structural)
-// ===================================================
+
 module adder32 (
     input  [31:0] in_a,
     input  [31:0] in_b,
@@ -76,11 +66,6 @@ module adder32 (
     assign cout = carry[31];
 endmodule
 
-
-
-// ===================================================
-// 1-bit Full Adder
-// ===================================================
 module full_adder (
     input  a,
     input  b,
